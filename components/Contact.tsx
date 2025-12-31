@@ -21,19 +21,19 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-32 bg-black text-white relative">
+    <section id="contact" className="py-32 bg-black text-white relative overflow-hidden">
       <div className="container mx-auto px-6 md:px-12">
-        <div className="grid lg:grid-cols-2 gap-24">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-32 items-start">
           
-          <div>
+          <div className="relative z-10">
             <motion.h2 
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[12vw] lg:text-[7vw] leading-[0.8] font-display font-black tracking-tighter mb-12"
+              className="text-[12vw] lg:text-[6vw] leading-[0.8] font-display font-black tracking-tighter mb-12"
             >
-              LET'S <br /> WORK <br /> <span className="text-neutral-700">TOGETHER</span>
+              LET'S <br /> WORK <br /> <span className="text-neutral-800">TOGETHER</span>
             </motion.h2>
             
             <motion.div 
@@ -86,14 +86,14 @@ const Contact: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             onSubmit={handleSubmit(onSubmit)} 
-            className="space-y-12 self-end"
+            className="space-y-12 mt-12 lg:mt-0"
           >
              <div className="relative">
                 <input 
                   {...register("name", { required: true })}
                   type="text" 
                   placeholder="Your Name"
-                  className="w-full bg-transparent border-b border-neutral-800 py-6 text-2xl focus:outline-none focus:border-white transition-colors placeholder:text-neutral-800 text-white"
+                  className="w-full bg-neutral-900/50 border-b border-neutral-800 px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 text-white rounded-t-lg"
                 />
              </div>
              <div className="relative">
@@ -101,19 +101,19 @@ const Contact: React.FC = () => {
                   {...register("email", { required: true })}
                   type="email" 
                   placeholder="Your Email"
-                  className="w-full bg-transparent border-b border-neutral-800 py-6 text-2xl focus:outline-none focus:border-white transition-colors placeholder:text-neutral-800 text-white"
+                  className="w-full bg-neutral-900/50 border-b border-neutral-800 px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 text-white rounded-t-lg"
                 />
              </div>
              <div className="relative">
                 <textarea 
                   {...register("message", { required: true })}
-                  rows={2}
+                  rows={4}
                   placeholder="Brief Description"
-                  className="w-full bg-transparent border-b border-neutral-800 py-6 text-2xl focus:outline-none focus:border-white transition-colors placeholder:text-neutral-800 resize-none text-white"
+                  className="w-full bg-neutral-900/50 border-b border-neutral-800 px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 resize-none text-white rounded-t-lg"
                 ></textarea>
              </div>
 
-             <button type="submit" className="group flex items-center gap-4 text-xl uppercase tracking-widest font-bold hover:gap-6 transition-all">
+             <button type="submit" className="group flex items-center gap-4 text-xl uppercase tracking-widest font-bold hover:gap-6 transition-all pt-8 pl-4">
                 Send Message <ArrowUpRight className="group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
              </button>
           </motion.form>
