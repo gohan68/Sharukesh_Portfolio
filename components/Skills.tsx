@@ -33,6 +33,19 @@ const Skills: React.FC = () => {
     return null; 
   };
 
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20, filter: 'blur(5px)' },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      filter: 'blur(0px)',
+      transition: { 
+        duration: 0.6, 
+        ease: [0.22, 1, 0.36, 1] 
+      } 
+    }
+  };
+
   return (
     <section className="py-24 bg-black text-white overflow-hidden border-y border-neutral-800 relative">
       
@@ -91,23 +104,30 @@ const Skills: React.FC = () => {
                 {category.title}
               </motion.h3>
               
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-6">
-                {category.skills.map((skill, skillIndex) => {
+              <motion.div 
+                className="grid grid-cols-3 sm:grid-cols-4 gap-6"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={{
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.08,
+                      delayChildren: catIndex * 0.1
+                    }
+                  }
+                }}
+              >
+                {category.skills.map((skill) => {
                   const iconUrl = getIconUrl(skill);
                   return (
                     <motion.div 
                       key={skill}
-                      initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                      whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ 
-                        duration: 0.4, 
-                        delay: 0.2 + (catIndex * 0.1) + (skillIndex * 0.05),
-                        ease: "easeOut" 
-                      }}
-                      className="group flex flex-col items-center gap-3"
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.05, y: -4 }}
+                      className="group flex flex-col items-center gap-3 cursor-pointer"
                     >
-                      <div className="w-12 h-12 flex items-center justify-center p-2 rounded-xl bg-neutral-900 border border-neutral-800 group-hover:bg-neutral-800 group-hover:border-neutral-600 transition-all duration-300 relative overflow-hidden">
+                      <div className="w-12 h-12 flex items-center justify-center p-2 rounded-xl bg-neutral-900 border border-neutral-800 group-hover:bg-neutral-800 group-hover:border-neutral-600 transition-colors duration-300 relative overflow-hidden">
                         {iconUrl ? (
                           <img 
                             src={iconUrl} 
@@ -118,13 +138,13 @@ const Skills: React.FC = () => {
                           <span className="text-xs text-center font-mono leading-none">{skill.slice(0, 2)}</span>
                         )}
                       </div>
-                      <span className="text-[10px] text-neutral-500 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute -bottom-6 whitespace-nowrap">
+                      <span className="text-[10px] text-neutral-500 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-all duration-300 absolute -bottom-6 whitespace-nowrap">
                         {skill}
                       </span>
                     </motion.div>
                   );
                 })}
-              </div>
+              </motion.div>
             </div>
           ))}
         </div>
