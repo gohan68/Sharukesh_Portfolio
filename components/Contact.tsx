@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { ArrowUpRight, Download } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { SOCIAL_LINKS } from '../constants';
 
 type FormData = {
@@ -11,6 +11,15 @@ type FormData = {
 };
 
 const Contact: React.FC = () => {
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const yBg = useTransform(scrollYProgress, [0, 1], [-100, 100]);
+  const yBg2 = useTransform(scrollYProgress, [0, 1], [100, -100]);
+
   const { register, handleSubmit, reset } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
@@ -21,8 +30,36 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-32 bg-black text-white relative overflow-hidden">
-      <div className="container mx-auto px-6 md:px-12">
+    <section ref={containerRef} id="contact" className="py-32 bg-black text-white relative overflow-hidden">
+      {/* Parallax Background Blobs */}
+      <motion.div 
+        style={{ y: yBg }}
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.1, 0.3, 0.1]
+        }}
+        transition={{ 
+          duration: 15, 
+          repeat: Infinity, 
+          ease: "linear" 
+        }}
+        className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-full blur-[120px] pointer-events-none" 
+      />
+      <motion.div 
+        style={{ y: yBg2 }}
+        animate={{ 
+          scale: [1.2, 1, 1.2],
+          opacity: [0.1, 0.2, 0.1]
+        }}
+        transition={{ 
+          duration: 20, 
+          repeat: Infinity, 
+          ease: "linear" 
+        }}
+        className="absolute bottom-[-10%] left-[-20%] w-[500px] h-[500px] bg-gradient-to-tr from-neutral-900 to-neutral-800 rounded-full blur-[100px] pointer-events-none" 
+      />
+
+      <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-32 items-start">
           
           <div className="relative z-10">
@@ -86,7 +123,7 @@ const Contact: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             onSubmit={handleSubmit(onSubmit)} 
-            className="space-y-12 mt-12 lg:mt-0"
+            className="space-y-12 mt-12 lg:mt-0 relative z-20"
           >
              <div className="relative">
                 <input 
