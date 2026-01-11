@@ -41,7 +41,7 @@ const Contact: React.FC = () => {
 
       await emailjs.sendForm(
         'service_yrtv6ns',          // Your EmailJS Service ID
-        'template_8mbr8qk',         // Your EmailJS Template ID
+        'template_rs3gpfb',         // Your EmailJS Template ID
         formRef.current,
         'E_DRe2dfm8pBQ5B1r'         // Your EmailJS Public Key
       );
