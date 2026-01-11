@@ -34,16 +34,23 @@ const Contact: React.FC = () => {
     setSubmitStatus('loading');
 
     try {
-      // EmailJS Configuration
-      // Get your Template ID and Public Key from EmailJS dashboard:
-      // 1. Template ID: Email Templates → Your Template → Settings → Template ID
-      // 2. Public Key: Account → API Keys → Public Key
+      const serviceId = 'service_yrtv6ns';
+      const publicKey = 'E_DRe2dfm8pBQ5B1r';
 
+      // Send notification email to you
       await emailjs.sendForm(
-        'service_yrtv6ns',          // Your EmailJS Service ID
-        'template_rs3gpfb',         // Your EmailJS Template ID
+        serviceId,
+        'template_rs3gpfb',           // Notification template
         formRef.current,
-        'E_DRe2dfm8pBQ5B1r'         // Your EmailJS Public Key
+        publicKey
+      );
+
+      // Send auto-reply to the visitor
+      await emailjs.sendForm(
+        serviceId,
+        'template_tqbji8v',           // Auto-reply template
+        formRef.current,
+        publicKey
       );
 
       setSubmitStatus('success');
