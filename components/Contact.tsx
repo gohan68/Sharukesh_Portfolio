@@ -6,8 +6,8 @@ import { SOCIAL_LINKS } from '../constants';
 import emailjs from '@emailjs/browser';
 
 type FormData = {
-  name: string;
-  email: string;
+  from_name: string;
+  from_email: string;
   message: string;
 };
 
@@ -160,34 +160,31 @@ const Contact: React.FC = () => {
           >
             <div className="relative">
               <input
-                {...register("name", { required: "Name is required" })}
-                name="from_name"
+                {...register("from_name", { required: "Name is required" })}
                 type="text"
                 placeholder="Your Name"
-                className={`w-full bg-neutral-900/50 border-b ${errors.name ? 'border-red-500' : 'border-neutral-800'} px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 text-white rounded-t-lg`}
+                className={`w-full bg-neutral-900/50 border-b ${errors.from_name ? 'border-red-500' : 'border-neutral-800'} px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 text-white rounded-t-lg`}
               />
-              {errors.name && <span className="text-red-500 text-sm mt-1">{errors.name.message}</span>}
+              {errors.from_name && <span className="text-red-500 text-sm mt-1">{errors.from_name.message}</span>}
             </div>
             <div className="relative">
               <input
-                {...register("email", {
+                {...register("from_email", {
                   required: "Email is required",
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                     message: "Invalid email address"
                   }
                 })}
-                name="from_email"
                 type="email"
                 placeholder="Your Email"
-                className={`w-full bg-neutral-900/50 border-b ${errors.email ? 'border-red-500' : 'border-neutral-800'} px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 text-white rounded-t-lg`}
+                className={`w-full bg-neutral-900/50 border-b ${errors.from_email ? 'border-red-500' : 'border-neutral-800'} px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 text-white rounded-t-lg`}
               />
-              {errors.email && <span className="text-red-500 text-sm mt-1">{errors.email.message}</span>}
+              {errors.from_email && <span className="text-red-500 text-sm mt-1">{errors.from_email.message}</span>}
             </div>
             <div className="relative">
               <textarea
                 {...register("message", { required: "Message is required" })}
-                name="message"
                 rows={4}
                 placeholder="Brief Description"
                 className={`w-full bg-neutral-900/50 border-b ${errors.message ? 'border-red-500' : 'border-neutral-800'} px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 resize-none text-white rounded-t-lg`}
