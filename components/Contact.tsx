@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { ArrowUpRight, Download } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowUpRight, Download, Loader2, CheckCircle, XCircle } from 'lucide-react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { SOCIAL_LINKS } from '../constants';
+import emailjs from '@emailjs/browser';
 
 type FormData = {
   name: string;
@@ -10,8 +11,13 @@ type FormData = {
   message: string;
 };
 
+type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
+
 const Contact: React.FC = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle');
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -20,60 +26,88 @@ const Contact: React.FC = () => {
   const yBg = useTransform(scrollYProgress, [0, 1], [-100, 100]);
   const yBg2 = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
-  const { register, handleSubmit, reset } = useForm<FormData>();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
-    console.log("Submitting:", data);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    alert("Message Sent.");
-    reset();
+    if (!formRef.current) return;
+
+    setSubmitStatus('loading');
+
+    try {
+      // EmailJS Configuration
+      // You need to replace these with your actual EmailJS credentials:
+      // 1. Go to https://www.emailjs.com/ and create a free account
+      // 2. Create an Email Service (connect your Gmail)
+      // 3. Create an Email Template with variables: {{from_name}}, {{from_email}}, {{message}}
+      // 4. Replace the IDs below with your actual IDs
+
+      await emailjs.sendForm(
+        'YOUR_SERVICE_ID',      // Replace with your EmailJS Service ID
+        'YOUR_TEMPLATE_ID',     // Replace with your EmailJS Template ID
+        formRef.current,
+        'YOUR_PUBLIC_KEY'       // Replace with your EmailJS Public Key
+      );
+
+      setSubmitStatus('success');
+      reset();
+
+      // Reset status after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      setSubmitStatus('error');
+
+      // Reset status after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    }
   };
 
   return (
     <section ref={containerRef} id="contact" className="py-32 bg-black text-white relative overflow-hidden">
       {/* Parallax Background Blobs */}
-      <motion.div 
+      <motion.div
         style={{ y: yBg }}
-        animate={{ 
+        animate={{
           scale: [1, 1.2, 1],
           opacity: [0.1, 0.3, 0.1]
         }}
-        transition={{ 
-          duration: 15, 
-          repeat: Infinity, 
-          ease: "linear" 
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "linear"
         }}
-        className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-full blur-[120px] pointer-events-none" 
+        className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-full blur-[120px] pointer-events-none"
       />
-      <motion.div 
+      <motion.div
         style={{ y: yBg2 }}
-        animate={{ 
+        animate={{
           scale: [1.2, 1, 1.2],
           opacity: [0.1, 0.2, 0.1]
         }}
-        transition={{ 
-          duration: 20, 
-          repeat: Infinity, 
-          ease: "linear" 
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "linear"
         }}
-        className="absolute bottom-[-10%] left-[-20%] w-[500px] h-[500px] bg-gradient-to-tr from-neutral-900 to-neutral-800 rounded-full blur-[100px] pointer-events-none" 
+        className="absolute bottom-[-10%] left-[-20%] w-[500px] h-[500px] bg-gradient-to-tr from-neutral-900 to-neutral-800 rounded-full blur-[100px] pointer-events-none"
       />
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-32 items-start">
-          
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-40 items-start">
+
           <div className="relative z-10">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[12vw] lg:text-[6vw] leading-[0.8] font-display font-black tracking-tighter mb-12"
+              className="text-[10vw] lg:text-[4vw] leading-[0.9] font-display font-black tracking-tighter mb-12"
             >
               LET'S <br /> WORK <br /> <span className="text-neutral-800">TOGETHER</span>
             </motion.h2>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -88,71 +122,137 @@ const Contact: React.FC = () => {
               </a>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.5 }}
               className="flex gap-8 mb-12"
             >
-              <a href={SOCIAL_LINKS.github} className="uppercase tracking-widest text-sm font-bold border-b border-transparent hover:border-white pb-1 transition-all">GitHub</a>
-              <a href={SOCIAL_LINKS.linkedin} className="uppercase tracking-widest text-sm font-bold border-b border-transparent hover:border-white pb-1 transition-all">LinkedIn</a>
+              <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" className="uppercase tracking-widest text-sm font-bold border-b border-transparent hover:border-white pb-1 transition-all">GitHub</a>
+              <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="uppercase tracking-widest text-sm font-bold border-b border-transparent hover:border-white pb-1 transition-all">LinkedIn</a>
             </motion.div>
 
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.6 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
             >
-                <a 
-                  href={SOCIAL_LINKS.resume} 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-3 px-8 py-4 border border-neutral-800 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300"
-                >
-                  Download Resume
-                  <Download className="group-hover:translate-y-1 transition-transform duration-300" size={18} />
-                </a>
+              <a
+                href={SOCIAL_LINKS.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-3 px-8 py-4 border border-neutral-800 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300"
+              >
+                Download Resume
+                <Download className="group-hover:translate-y-1 transition-transform duration-300" size={18} />
+              </a>
             </motion.div>
           </div>
 
-          <motion.form 
+          <motion.form
+            ref={formRef}
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            onSubmit={handleSubmit(onSubmit)} 
-            className="space-y-12 mt-12 lg:mt-0 relative z-20"
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-8 mt-8 lg:mt-0 lg:pt-8 relative z-20"
           >
-             <div className="relative">
-                <input 
-                  {...register("name", { required: true })}
-                  type="text" 
-                  placeholder="Your Name"
-                  className="w-full bg-neutral-900/50 border-b border-neutral-800 px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 text-white rounded-t-lg"
-                />
-             </div>
-             <div className="relative">
-                <input 
-                  {...register("email", { required: true })}
-                  type="email" 
-                  placeholder="Your Email"
-                  className="w-full bg-neutral-900/50 border-b border-neutral-800 px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 text-white rounded-t-lg"
-                />
-             </div>
-             <div className="relative">
-                <textarea 
-                  {...register("message", { required: true })}
-                  rows={4}
-                  placeholder="Brief Description"
-                  className="w-full bg-neutral-900/50 border-b border-neutral-800 px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 resize-none text-white rounded-t-lg"
-                ></textarea>
-             </div>
+            <div className="relative">
+              <input
+                {...register("name", { required: "Name is required" })}
+                name="from_name"
+                type="text"
+                placeholder="Your Name"
+                className={`w-full bg-neutral-900/50 border-b ${errors.name ? 'border-red-500' : 'border-neutral-800'} px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 text-white rounded-t-lg`}
+              />
+              {errors.name && <span className="text-red-500 text-sm mt-1">{errors.name.message}</span>}
+            </div>
+            <div className="relative">
+              <input
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Invalid email address"
+                  }
+                })}
+                name="from_email"
+                type="email"
+                placeholder="Your Email"
+                className={`w-full bg-neutral-900/50 border-b ${errors.email ? 'border-red-500' : 'border-neutral-800'} px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 text-white rounded-t-lg`}
+              />
+              {errors.email && <span className="text-red-500 text-sm mt-1">{errors.email.message}</span>}
+            </div>
+            <div className="relative">
+              <textarea
+                {...register("message", { required: "Message is required" })}
+                name="message"
+                rows={4}
+                placeholder="Brief Description"
+                className={`w-full bg-neutral-900/50 border-b ${errors.message ? 'border-red-500' : 'border-neutral-800'} px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 resize-none text-white rounded-t-lg`}
+              ></textarea>
+              {errors.message && <span className="text-red-500 text-sm mt-1">{errors.message.message}</span>}
+            </div>
 
-             <button type="submit" className="group flex items-center gap-4 text-xl uppercase tracking-widest font-bold hover:gap-6 transition-all pt-8 pl-4">
-                Send Message <ArrowUpRight className="group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
-             </button>
+            {/* Submit Button with Status */}
+            <div className="pt-8 pl-4">
+              <AnimatePresence mode="wait">
+                {submitStatus === 'idle' && (
+                  <motion.button
+                    key="idle"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    type="submit"
+                    className="group flex items-center gap-4 text-xl uppercase tracking-widest font-bold hover:gap-6 transition-all cursor-pointer"
+                  >
+                    Send Message <ArrowUpRight className="group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
+                  </motion.button>
+                )}
+
+                {submitStatus === 'loading' && (
+                  <motion.div
+                    key="loading"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex items-center gap-4 text-xl uppercase tracking-widest font-bold text-neutral-400"
+                  >
+                    <Loader2 className="animate-spin" size={24} />
+                    Sending...
+                  </motion.div>
+                )}
+
+                {submitStatus === 'success' && (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex items-center gap-4 text-xl uppercase tracking-widest font-bold text-green-500"
+                  >
+                    <CheckCircle size={24} />
+                    Message Sent!
+                  </motion.div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <motion.div
+                    key="error"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex items-center gap-4 text-xl uppercase tracking-widest font-bold text-red-500"
+                  >
+                    <XCircle size={24} />
+                    Failed. Try Again.
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </motion.form>
 
         </div>

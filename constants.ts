@@ -1,15 +1,15 @@
 import { Project, Experience, SkillCategory } from './types';
-import { 
-  Code, Layout, Database, Server, Smartphone, 
-  GitBranch, Terminal, Globe, Cpu, Layers 
+import {
+  Code, Layout, Database, Server, Smartphone,
+  GitBranch, Terminal, Globe, Cpu, Layers
 } from 'lucide-react';
 
 export const SOCIAL_LINKS = {
   email: "sharukesh96@gmail.com",
   phone: "+91-87785-47235",
-  linkedin: "https://linkedin.com/in/sharukesh-p", // Placeholder
+  linkedin: "https://www.linkedin.com/in/sharukesh-886103168/",
   github: "https://github.com/gohan68",
-  resume: "#"
+  resume: "/images/Sharukesh_Resume.pdf"
 };
 
 export const SKILLS: SkillCategory[] = [
@@ -30,7 +30,7 @@ export const SKILLS: SkillCategory[] = [
 export const EXPERIENCE: Experience[] = [
   {
     company: "DUTUK",
-    role: "Fullstack Developer & Team Lead",
+    role: "Fullstack Developer",
     period: "May 2025 – Present",
     description: "Leading the development of scalable web applications from scratch, managing a team of developers, and ensuring code quality and performance optimization."
   },
@@ -60,8 +60,8 @@ export const PROJECTS: Project[] = [
       "Smart Contracts & Project Postings"
     ],
     highlight: "Built enterprise-grade app in just 2.5 weeks using AI-powered tools.",
-    links: { demo: "#", github: "#" },
-    image: "https://picsum.photos/800/600?random=1"
+    links: { demo: "https://heyprodata.com", github: "https://github.com/CatifiedSWE/hey-pro-data-beta" },
+    image: "/images/HeyProData.png"
   },
   {
     title: "Cedar Elevators",
@@ -74,11 +74,11 @@ export const PROJECTS: Project[] = [
       "GST Calculations & PO Uploads"
     ],
     highlight: "Advanced verified/unverified business workflows and bulk pricing tiers.",
-    links: { demo: "#", github: "#" },
-    image: "https://picsum.photos/800/600?random=2"
+    links: { demo: "", github: "https://github.com/cedarelevatorsindustries/cedarelevators" },
+    image: "/images/Cedar Elevators.png"
   },
   {
-    title: "Dude Men's Wears",
+    title: "Dude Men's Wear",
     period: "Nov-Dec 2025",
     description: "Modern e-commerce platform for men's fashion featuring a robust admin dashboard.",
     techStack: ["Next.js 16", "Supabase", "Shadcn/UI", "Razorpay"],
@@ -88,8 +88,8 @@ export const PROJECTS: Project[] = [
       "Secure Checkout Flow"
     ],
     highlight: "Deployment-ready structure for Vercel/Hostinger with optimized UI components.",
-    links: { demo: "#", github: "#" },
-    image: "https://picsum.photos/800/600?random=3"
+    links: { demo: "https://dudemw.com", github: "https://github.com/Mergexhq/dudemw" },
+    image: "/images/Dude Men's Wear.png"
   },
   {
     title: "Zeko",
@@ -98,8 +98,8 @@ export const PROJECTS: Project[] = [
     techStack: ["React", "TypeScript", "AI Integration", "PDF.js"],
     features: ["Document Parsing", "Contextual Q&A", "Optimized Rendering"],
     highlight: "Highly optimized frontend for seamless large document handling.",
-    links: { demo: "#", github: "#" },
-    image: "https://picsum.photos/800/600?random=4"
+    links: { demo: "", github: "https://github.com/gohan68/Zeko_Final" },
+    image: "/images/Zeko.png"
   },
   {
     title: "Time Table System",
@@ -108,7 +108,7 @@ export const PROJECTS: Project[] = [
     techStack: ["React", "Node.js", "PostgreSQL", "Algorithms"],
     features: ["Conflict Detection", "Auto-Generation", "Teacher Management"],
     highlight: "Solved complex scheduling constraints efficiently.",
-    links: { demo: "#", github: "#" },
-    image: "https://picsum.photos/800/600?random=5"
+    links: { demo: "", github: "https://github.com/gohan68/Time-Table-Management-System/tree/master" },
+    image: "/images/Time Table Management System.png"
   }
 ];

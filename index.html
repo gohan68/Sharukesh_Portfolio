@@ -1,100 +1,133 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth antialiased selection:bg-white selection:text-black dark:selection:bg-white dark:selection:text-black">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sharukesh P | Fullstack Developer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Satoshi:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              display: ['Satoshi', 'sans-serif'],
+<html lang="en"
+  class="scroll-smooth antialiased selection:bg-white selection:text-black dark:selection:bg-white dark:selection:text-black">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sharukesh | Fullstack Developer</title>
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Sharukesh - Fullstack Developer specializing in Next.js, React, Supabase, and modern web applications. Building scalable enterprise-grade SaaS platforms.">
+  <meta name="keywords" content="Sharukesh, Fullstack Developer, Next.js, React, Supabase, Web Developer, Chennai">
+  <meta name="author" content="Sharukesh">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sharukesh | Fullstack Developer">
+  <meta property="og:description"
+    content="Building scalable enterprise-grade SaaS platforms and modern web experiences with Next.js & AI Tools">
+  <meta property="og:image" content="/images/og-image.png">
+  <meta property="og:url" content="https://sharukesh.dev">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sharukesh | Fullstack Developer">
+  <meta name="twitter:description"
+    content="Building scalable enterprise-grade SaaS platforms and modern web experiences with Next.js & AI Tools">
+  <meta name="twitter:image" content="/images/og-image.png">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#050505">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Satoshi:wght@400;500;700;900&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Satoshi', 'sans-serif'],
+          },
+          colors: {
+            neutral: {
+              50: '#fafafa',
+              100: '#f5f5f5',
+              200: '#e5e5e5',
+              300: '#d4d4d4',
+              400: '#a3a3a3',
+              500: '#737373',
+              600: '#525252',
+              700: '#404040',
+              800: '#262626',
+              900: '#171717',
+              950: '#0a0a0a',
+            }
+          },
+          animation: {
+            'spin-slow': 'spin 8s linear infinite',
+            'marquee': 'marquee 25s linear infinite',
+            'marquee-reverse': 'marquee-reverse 25s linear infinite',
+          },
+          keyframes: {
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-100%)' },
             },
-            colors: {
-              neutral: {
-                50: '#fafafa',
-                100: '#f5f5f5',
-                200: '#e5e5e5',
-                300: '#d4d4d4',
-                400: '#a3a3a3',
-                500: '#737373',
-                600: '#525252',
-                700: '#404040',
-                800: '#262626',
-                900: '#171717',
-                950: '#0a0a0a',
-              }
-            },
-            animation: {
-              'spin-slow': 'spin 8s linear infinite',
-              'marquee': 'marquee 25s linear infinite',
-              'marquee-reverse': 'marquee-reverse 25s linear infinite',
-            },
-            keyframes: {
-              marquee: {
-                '0%': { transform: 'translateX(0%)' },
-                '100%': { transform: 'translateX(-100%)' },
-              },
-              'marquee-reverse': {
-                '0%': { transform: 'translateX(-100%)' },
-                '100%': { transform: 'translateX(0%)' },
-              }
+            'marquee-reverse': {
+              '0%': { transform: 'translateX(-100%)' },
+              '100%': { transform: 'translateX(0%)' },
             }
           }
         }
       }
-    </script>
-    <style>
-      /* Grain Effect */
-      .bg-grain {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 9999;
-        opacity: 0.05;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      }
+    }
+  </script>
+  <style>
+    /* Grain Effect */
+    .bg-grain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
 
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 5px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0a0a0a;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #262626;
-        border-radius: 99px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #404040;
-      }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
 
-      /* Utilities */
-      .text-outline {
-        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
-        color: transparent;
-      }
-      .light .text-outline {
-        -webkit-text-stroke: 1px rgba(0, 0, 0, 0.2);
-      }
-      
-      .clip-text-image {
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-      }
-    </style>
+    ::-webkit-scrollbar-track {
+      background: #0a0a0a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #262626;
+      border-radius: 99px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #404040;
+    }
+
+    /* Utilities */
+    .text-outline {
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+      color: transparent;
+    }
+
+    .light .text-outline {
+      -webkit-text-stroke: 1px rgba(0, 0, 0, 0.2);
+    }
+
+    .clip-text-image {
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+  </style>
   <script type="importmap">
 {
   "imports": {
@@ -109,7 +142,10 @@
 }
 </script>
 </head>
-  <body class="bg-[#fafafa] text-neutral-900 dark:bg-[#050505] dark:text-neutral-50 transition-colors duration-500">
-    <div id="root"></div>
-  </body>
+
+<body class="bg-[#fafafa] text-neutral-900 dark:bg-[#050505] dark:text-neutral-50 transition-colors duration-500">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
 </html>
