@@ -6,8 +6,8 @@ import { SOCIAL_LINKS } from '../constants';
 import emailjs from '@emailjs/browser';
 
 type FormData = {
-  from_name: string;
-  from_email: string;
+  name: string;
+  email: string;
   message: string;
 };
 
@@ -160,16 +160,16 @@ const Contact: React.FC = () => {
           >
             <div className="relative">
               <input
-                {...register("from_name", { required: "Name is required" })}
+                {...register("name", { required: "Name is required" })}
                 type="text"
                 placeholder="Your Name"
-                className={`w-full bg-neutral-900/50 border-b ${errors.from_name ? 'border-red-500' : 'border-neutral-800'} px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 text-white rounded-t-lg`}
+                className={`w-full bg-neutral-900/50 border-b ${errors.name ? 'border-red-500' : 'border-neutral-800'} px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 text-white rounded-t-lg`}
               />
-              {errors.from_name && <span className="text-red-500 text-sm mt-1">{errors.from_name.message}</span>}
+              {errors.name && <span className="text-red-500 text-sm mt-1">{errors.name.message}</span>}
             </div>
             <div className="relative">
               <input
-                {...register("from_email", {
+                {...register("email", {
                   required: "Email is required",
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -178,9 +178,9 @@ const Contact: React.FC = () => {
                 })}
                 type="email"
                 placeholder="Your Email"
-                className={`w-full bg-neutral-900/50 border-b ${errors.from_email ? 'border-red-500' : 'border-neutral-800'} px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 text-white rounded-t-lg`}
+                className={`w-full bg-neutral-900/50 border-b ${errors.email ? 'border-red-500' : 'border-neutral-800'} px-4 py-6 text-xl focus:outline-none focus:border-white focus:bg-neutral-900 transition-all placeholder:text-neutral-600 text-white rounded-t-lg`}
               />
-              {errors.from_email && <span className="text-red-500 text-sm mt-1">{errors.from_email.message}</span>}
+              {errors.email && <span className="text-red-500 text-sm mt-1">{errors.email.message}</span>}
             </div>
             <div className="relative">
               <textarea
