@@ -75,7 +75,7 @@ export const PROJECTS: Project[] = [
     ],
     highlight: "Advanced verified/unverified business workflows and bulk pricing tiers.",
     links: { demo: "", github: "https://github.com/cedarelevatorsindustries/cedarelevators" },
-    image: "/images/Cedar Elevators.png"
+    image: "/images/CedarElevators.png"
   },
   {
     title: "Dude Men's Wear",
@@ -89,7 +89,7 @@ export const PROJECTS: Project[] = [
     ],
     highlight: "Deployment-ready structure for Vercel/Hostinger with optimized UI components.",
     links: { demo: "https://dudemw.com", github: "https://github.com/Mergexhq/dudemw" },
-    image: "/images/Dude Men's Wear.png"
+    image: "/images/DudeMensWear.png"
   },
   {
     title: "Zeko",
@@ -109,6 +109,6 @@ export const PROJECTS: Project[] = [
     features: ["Conflict Detection", "Auto-Generation", "Teacher Management"],
     highlight: "Solved complex scheduling constraints efficiently.",
     links: { demo: "", github: "https://github.com/gohan68/Time-Table-Management-System/tree/master" },
-    image: "/images/Time Table Management System.png"
+    image: "/images/TimeTableManagementSystem.png"
   }
 ];

@@ -35,17 +35,15 @@ const Contact: React.FC = () => {
 
     try {
       // EmailJS Configuration
-      // You need to replace these with your actual EmailJS credentials:
-      // 1. Go to https://www.emailjs.com/ and create a free account
-      // 2. Create an Email Service (connect your Gmail)
-      // 3. Create an Email Template with variables: {{from_name}}, {{from_email}}, {{message}}
-      // 4. Replace the IDs below with your actual IDs
+      // Get your Template ID and Public Key from EmailJS dashboard:
+      // 1. Template ID: Email Templates → Your Template → Settings → Template ID
+      // 2. Public Key: Account → API Keys → Public Key
 
       await emailjs.sendForm(
-        'YOUR_SERVICE_ID',      // Replace with your EmailJS Service ID
-        'YOUR_TEMPLATE_ID',     // Replace with your EmailJS Template ID
+        'service_yrtv6ns',          // Your EmailJS Service ID
+        'template_8mbr8qk',         // Your EmailJS Template ID
         formRef.current,
-        'YOUR_PUBLIC_KEY'       // Replace with your EmailJS Public Key
+        'E_DRe2dfm8pBQ5B1r'         // Your EmailJS Public Key
       );
 
       setSubmitStatus('success');
